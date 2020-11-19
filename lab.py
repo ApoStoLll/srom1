@@ -117,7 +117,7 @@ def div(num1, num2):
         if not compare(r,c):
             t -= 1
             c = shiftDigitsToHigh(num2, t-k)
-        r = sub(r, c, 2)
+        r = Mapper.mapDecToBin(sub(r, c, 2).numDec)
         q = insert(q, t-k)
     return q, r  
 
@@ -131,19 +131,46 @@ def power(num1, num2):
         #print(num1, num3)
     return num3
 
+def testDistr(beta, num1, num2, num3): #(a+b)c
+    num1sum2 = add(num1.numBig, num2.numBig, beta).numBig
+    num1sum2mul3 = mul(num1sum2, num3.numBig, beta)
+
+    num3mul1sum2 = mul(num3.numBig, num1sum2, beta)
+
+    num1mul3 = mul(num1.numBig, num3.numBig, beta).numBig
+    num2mul3 = mul(num2.numBig, num3.numBig, beta).numBig
+    num123 = add(num1mul3, num2mul3, beta)
+    print(num1sum2mul3.numDec, num3mul1sum2.numDec, num123.numDec)
+
+def testSum(beta, num1, num2): #na = n + n + n + ... + n
+    numSum = []
+    for i in range(num1.numDec):
+        numSum = add(numSum, num2.numBig, beta).numBig
+    numNA = mul(num1.numBig, num2.numBig, beta)
+    numSumNumber = Number(beta, numSum, numType="big")
+    print(numNA.numDec, numSumNumber.numDec)
+
+
+
 def main():
     beta = 32
-    number1 = Number(beta, "A324")
-    number2 = Number(beta, "B431")
+    number1 = Number(beta, "76AB")
+    number2 = Number(beta, "345F4")
+    number3 = Number(beta, "235CF")
+    testDistr(beta, number1, number2, number3)
+    testSum(beta, number1, number2)
+
     num1Bin = Mapper.mapDecToBin(number2.numDec)
     num2Bin = Mapper.mapDecToBin(number1.numDec)
-    mainBin(num1Bin, num2Bin)
+    #mainBin(num1Bin, num2Bin)
 
 def mainBin(number1, number2):
     #res = div(num1 = number1, num2 = number2)
+    #print(number1)
     res = power(number1, number2)
     #print(res)
     print(Mapper.mapBinToDec(res))
+    #print(16**16)
 
 def revers(nums):
     for num in nums:
