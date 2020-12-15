@@ -108,12 +108,28 @@ def gorner(a, b, n):
     return c
 
 def mainLab2():
+    # beta = 1024
+    # number1 = Number(beta, "1EAFD68DCE7A944D4B0967302")
+    # number2 = Number(beta, "00ABD8E74A99A18BCF231B05D")
+    # mod = Number(beta, "78")
+
+    # num1Bin = Mapper.mapDecToBin(number2.numDec)
+    # num2Bin = Mapper.mapDecToBin(number1.numDec)
+    # modBin = Mapper.mapDecToBin(mod.numDec)
+
+    # res = barret(num2Bin, num1Bin, modBin)
+
+    # resDec = Mapper.mapBinToDec(res)
+    # resNum = Number(beta, resDec, "dec")
+    # print(resNum.hex)
     #checkAdd()
     #checkGcd()
     #checkLcm()
     #checkSub()
     #checkMul()
-    checkPow()
+    #checkPow()
+    #test1()
+    test2()
 
 
 
@@ -191,7 +207,7 @@ def checkPow():
     resNum = Number(beta, resDec, "dec")
     print(resNum.hex)
 
-def test1():
+def test1(): # distr
     beta = 1024
     number1 = Number(beta, "1EAEDD395588036066915AF60F3F84502967BD8617DC")
     number2 = Number(beta, "1253FBED85830A10694A33E1C0DF38E62C8F6B2575B1")
@@ -203,8 +219,40 @@ def test1():
     num3Bin = Mapper.mapDecToBin(number3.numDec)
     modBin = Mapper.mapDecToBin(mod.numDec)
 
+    num12sum = addMod(num1Bin, num2Bin, modBin, 2)
+    num12sum3 = mulMod(num12sum, num3Bin, modBin, 2)
+    num123 = mulMod(num3Bin, num12sum, modBin, 2)
+
+    num13 = mulMod(num1Bin, num3Bin, modBin, 2)
+    num23 = mulMod(num2Bin, num3Bin, modBin, 2)
+    num123sum = addMod(num13, num23, modBin, 2)
+
+    if num12sum3 == num123 and num123 == num123sum:
+        print("Norm")
+    else:
+        print("ta za sho")
 
 
+def test2(): #na = n + n + n + ...
+    beta = 1024
+    number1 = Number(beta, "1E")
+    number2 = Number(beta, "12")
+    mod = Number(beta, "A")
+
+    num1Bin = Mapper.mapDecToBin(number1.numDec)
+    num2Bin = Mapper.mapDecToBin(number2.numDec)
+    modBin = Mapper.mapDecToBin(mod.numDec)
+
+    numNa = mulMod(num1Bin, num2Bin, modBin, 2)
+    
+    numbin = []
+    for i in range(number1.numDec):
+        numbin = addMod(numbin, num2Bin, modBin, 2)
+    
+    if numbin == numNa:
+        print("Norm")
+    else:
+        print("ta za sho")
 
 if __name__ == "__main__":
     mainLab2()
