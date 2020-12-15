@@ -2,7 +2,7 @@ from number import Number
 from mapper import Mapper
 from lab import *
 
-def gcd(num1, num2):
+def gcd(num1, num2): #bin
     print(num1, num2)
     if not compare(num1, num2):
         num1, num2 = num2.copy(), num1.copy()
@@ -35,8 +35,70 @@ def gcd(num1, num2):
         if len(num2) == 0:
             num2.append(0)
     d = mul(d, num1, 2)
-    return d
+    return d #Number
 
+def lcm(num1, num2): #bin
+    if not compare(num1, num2):
+        x = num1.copy()
+        num1 = num2.copy()
+        num2 = x
+    gcdNum = gcd(num1.copy(), num2.copy())
+    num1 = div(num1, Mapper.mapDecToBin(gcdNum.numDec))[0]
+    num3 = mul(num2, num1, 2)
+    return num3 #Number
+
+def barret(x, n, m):
+    q = killDigits(x.copy(), len(n) - 1)
+    q = mul(q, m, 2).numBig
+    q = killDigits(x.copy(), len(n) + 1)
+    r = sub(x.copy(), mul(q.copy(), n.copy(), 2), 2).numBig
+    return div(x,n)[1]
+
+def killDigits(x, k):
+    if x != None:
+        return x
+    for i in range(0, k):
+        del x[-i+1]
+    return x
+
+def addMod(num1, num2, modBin, beta):
+    num4 = add(num1, num2, beta)
+    num4Bin = Mapper.mapDecToBin(num4.numDec)
+    m = 2 ** len(num4Bin)
+    mBin = Mapper.mapDecToBin(m)
+    m = div(mBin, modBin)[0]
+    num5 = barret(num4Bin, modBin, m)
+    return num5 #Bin
+
+def subMod(num1, num2, modBin, beta):
+    num4 = sub(num1, num2, beta)
+    num4Bin = Mapper.mapDecToBin(num4.numDec)
+    m = 2 ** len(num4Bin)
+    mBin = Mapper.mapDecToBin(m)
+    m = div(mBin, modBin)[0]
+    num5 = barret(num4Bin, modBin, m)
+    return num5 #Bin
+
+def mulMod(num1, num2, modBin, beta):
+    num4 = mul(num1, num2, beta)
+    num4Bin = Mapper.mapDecToBin(num4.numDec)
+    m = 2 ** len(num4Bin)
+    mBin = Mapper.mapDecToBin(m)
+    m = div(mBin, modBin)[0]
+    num5 = barret(num4Bin, modBin, m)
+    return num5 #Bin
+
+def gorner(a, b, n):
+    c = [1]
+    m = 2 ** (len(n) * 2)
+    mBin = Mapper.mapDecToBin(m)
+    m = div(mBin, n)[0]
+    b.reverse()
+    for i in range(0, len(b)):
+        if b[i] == 1:
+            c = barret(mul(c.copy(), a.copy(), 2).numBig, n, m)
+        a = barret(mul(a.copy(), a.copy(), 2).numBig, n, m)
+    return c
 
 def mainLab2():
     beta = 32
