@@ -108,20 +108,6 @@ def gorner(a, b, n):
     return c
 
 def mainLab2():
-    # beta = 1024
-    # number1 = Number(beta, "1EAFD68DCE7A944D4B0967302")
-    # number2 = Number(beta, "00ABD8E74A99A18BCF231B05D")
-    # mod = Number(beta, "78")
-
-    # num1Bin = Mapper.mapDecToBin(number2.numDec)
-    # num2Bin = Mapper.mapDecToBin(number1.numDec)
-    # modBin = Mapper.mapDecToBin(mod.numDec)
-
-    # res = barret(num2Bin, num1Bin, modBin)
-
-    # resDec = Mapper.mapBinToDec(res)
-    # resNum = Number(beta, resDec, "dec")
-    # print(resNum.hex)
     #checkAdd()
     #checkGcd()
     #checkLcm()
@@ -129,7 +115,7 @@ def mainLab2():
     #checkMul()
     #checkPow()
     #test1()
-    test2()
+    #test2()
 
 
 

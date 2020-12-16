@@ -54,6 +54,19 @@ class Mapper:
             numDec += char * int(2 ** i)
             i += 1
         return numDec
-        
+
+    @staticmethod
+    def mapStringToBin(strNum):
+        numBin = []
+        for char in strNum:
+            numBin.append(int(char))
+        return numBin
+    
+    @staticmethod
+    def mapBinToString(num):
+        strNum = ""
+        for bit in num:
+            strNum += str(bit)
+        return strNum
 
 
