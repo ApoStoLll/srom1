@@ -141,6 +141,10 @@ def testDistr(beta, num1, num2, num3): #(a+b)c
     num2mul3 = mul(num2.numBig, num3.numBig, beta).numBig
     num123 = add(num1mul3, num2mul3, beta)
     print(num1sum2mul3.numDec, num3mul1sum2.numDec, num123.numDec)
+    if num1sum2mul3.numDec == num3mul1sum2.numDec and num3mul1sum2.numDec == num123.numDec:
+        print("Ok")
+    else:
+        print("Wrong")
 
 def testSum(beta, num1, num2): #na = n + n + n + ... + n
     numSum = []
@@ -149,27 +153,32 @@ def testSum(beta, num1, num2): #na = n + n + n + ... + n
     numNA = mul(num1.numBig, num2.numBig, beta)
     numSumNumber = Number(beta, numSum, numType="big")
     print(numNA.numDec, numSumNumber.numDec)
+    if numNA.numDec == numSumNumber.numDec:
+        print("Ok")
+    else:
+        print("Wrong")
 
 
 
 def main():
     beta = 32
-    number1 = Number(beta, "76AB")
-    number2 = Number(beta, "345F4")
+    number1 = Number(beta, "76")
+    number2 = Number(beta, "345")
     number3 = Number(beta, "235CF")
-    testDistr(beta, number1, number2, number3)
-    testSum(beta, number1, number2)
+    #testDistr(beta, number1, number2, number3)
+    #testSum(beta, number1, number2)
 
     num1Bin = Mapper.mapDecToBin(number2.numDec)
     num2Bin = Mapper.mapDecToBin(number1.numDec)
-    #mainBin(num1Bin, num2Bin)
+    mainBin(num1Bin, num2Bin)
 
 def mainBin(number1, number2):
     #res = div(num1 = number1, num2 = number2)
     #print(number1)
     res = power(number1, number2)
     #print(res)
-    print(Mapper.mapBinToDec(res))
+    num = Number(32, Mapper.mapBinToDec(res), "dec")
+    print(num.hex)
     #print(16**16)
 
 def revers(nums):
